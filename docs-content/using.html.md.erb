@@ -38,7 +38,7 @@ If the service instance creation fails, make sure that Lua scripting is enabled 
 1. Run the ``cf target`` command to verify that your cf-cli is authenticated and pointing to the correct organization and space.
 
 1. Creating service instances across platforms are detailed [here] (https://cli.cloudfoundry.org/en-US/cf/create-service.html). When creating a service instance of DX APM for PCF, configuration parameter ``agent_manager_url`` is required.   
-For example, ``cf create-service DX-APM standard <your service instance name> -c '{"agent_manager_url" :"http://your.dx-apm.server.url"}'``   
+For example, ``cf create-service introscope standard <your service instance name> -c '{"agent_manager_url" :"http://your.dx-apm.server.url"}'``   
 Additional configuration parameters understood by DX APM for PCF can be found [here] (#params).   
 If the service instance creation fails, make sure that Lua scripting is enabled on your Redis for PCF installation. It is required for DX APM for PCF. Enable Lua scripting and reinstall Redis for PCF in the Ops Manager. If Lua scripting is already enabled, contact [Broadcom Support] (https://www.broadcom.com/support/request-tech-support).
 
