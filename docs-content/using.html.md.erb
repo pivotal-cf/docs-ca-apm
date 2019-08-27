@@ -1,31 +1,153 @@
 ---
-title: Using YOUR-PRODUCT-NAME
-owner: Partners
+title: Using DX Application Performance Management for PCF
 ---
 
-<strong><%= modified_date %></strong>
+##<a id='overview'></a> Overview
+Follow these high-level steps to use DX APM for PCF:
 
-This topic describes how to use YOUR-PRODUCT-NAME.
+1. [Create a service instance] (#creating).
 
-##<a id='using'></a> Using YOUR-PRODUCT-NAME
+1. [Bind an application to the service instance] (#binding).
 
-**This topic should include any instructions for how to use the service or dashboard created by the tile.
-Give procedures for how to perform the different functions offered by your product and provide screenshots where necessary.**
+1. [Push or restage the application] (#restaging).
 
-Other topics that you should address in your documentation:
+You can use the Apps Manager or use Cloud Foundry Command Line Interface (cf-cli) to perform these steps.
 
-+ **Troubleshooting**---If you include a Troubleshooting section, follow the Symptom/Explanation format used in the
-  [Okta Troubleshooting](http://docs.pivotal.io/p-identity/okta/troubleshooting.html) topic.
+##<a id='creating'></a> Creating a Service Instance
 
-+ **Disaster recovery**--How do you recover data from the tile after a disaster? How do you perform backups?
+###<a id='apps1'></a>Using the Apps Manager
+1. Navigate to your space and click **Add a Service**.
 
-+ **Scalability**--How do you scale up the tile? How do you know when you need to scale up?
+1. Click on **DX Application Performance Management** in the Services Marketplace listings.
 
-+ **Monitoring**--How do you monitor the tile? Does the tile send events to the Loggregator Firehose?
+1. Choose the **Standard** plan, and click **Select Plan**.
 
-+ **Auditing**--Can PCF operators use the standard Accounting and Usage reports?
+1. Provide a service **instance name**.
 
-+ **Security**--How is this tile secured? How is the data secured?
+1. In the **Advanced Configuration** section, supply values for the parameters.  
+These parameters are required: ``agent_manager_url``, the URL to an Enterprise Manager server or to a DX APM SaaS tenant. All other parameters are optional depending on your DX APM installation.
 
-You can create separate pages for each of these topics or group them in one page about administering or maintaining the tile.
+1. (Optional) You may [bind] (#apps2) this service instance to an application right now. You can also perform the bind later.  
 
+1. Click **Create** to create the service instance.  
+If the service instance creation fails, make sure that Lua scripting is enabled on your Redis for PCF installation. It is required for DX APM for PCF. Enable Lua scripting and reinstall Redis for PCF in the Ops Manager. If Lua scripting is already enabled, contact [Broadcom Support] (https://www.broadcom.com/support/request-tech-support).
+
+1. Proceed to [binding] (#apps2) this service instance to an application.
+
+###<a id='cli1'></a>Using the cf-cli
+1. Run the ``cf target`` command to verify that your cf-cli is authenticated and pointing to the correct organization and space.
+
+1. Creating service instances across platforms are detailed [here] (https://cli.cloudfoundry.org/en-US/cf/create-service.html). When creating a service instance of DX APM for PCF, configuration parameter ``agent_manager_url`` is required.   
+For example, ``cf create-service introscope standard <your service instance name> -c '{"agent_manager_url" :"http://your.dx-apm.server.url"}'``   
+Additional configuration parameters understood by DX APM for PCF can be found [here] (#params).   
+If the service instance creation fails, make sure that Lua scripting is enabled on your Redis for PCF installation. It is required for DX APM for PCF. Enable Lua scripting and reinstall Redis for PCF in the Ops Manager. If Lua scripting is already enabled, contact [Broadcom Support] (https://www.broadcom.com/support/request-tech-support).
+
+1. Proceed to binding this service instance to an application by using either the [cf-cli] (#cli2) or the [application manifest] (#manifest).
+
+##<a id='binding'></a> Binding an Application to a Service Instance
+  
+###<a id='apps2'></a>Using the Apps Manager
+1. If you chose to bind to an application when you [created the service instance] (#apps1), proceed to [push or restage] (#apps3) the application.
+
+1. Navigate to the **Services** tab of the application in the Apps Manager.
+
+1. Click **Bind Service**.
+
+1. Under the **Service to Bind** dropdown, select the service instance that you created. 
+
+1. (Optional) You may supply additional parameters by using key value fields under **Add Parameters**. Supported configuration parameters can be found [here] (#params)
+
+1. Click **Bind** to create the binding.
+
+1. Proceed to [restage] (#apps3) the application.
+
+###<a id='cli2'></a>Using the cf-cli
+1. Run the ``cf bind-service <application-name> <your service instance name>`` command to bind the application to the service instance. 
+
+1. You can pass additional parameters as specified [here] (http://cli.cloudfoundry.org/en-US/cf/bind-service.html). Supported configuration parameters can be found [here] (#params).
+
+1. Proceed to [restage] (#cli3) the application.
+
+###<a id='manifest'></a>Using the Application Manifest
+
+1. Add ``<your service instance name>`` to the **services** section of the application manifest to bind the service instance to the application.
+
+	```yaml
+	---
+	applications:
+	- name: cf-java
+	  memory: 1G
+	  services:
+		- <your service instance name>
+	```
+
+1. Proceed to [push] (#cli3) the application.
+
+##<a id='restaging'></a> Push or Restage the Application
+
+###<a id='apps3'></a>Using the Apps Manager
+1. Navigate to the application in the Apps Manager.
+
+1. If there is a **Restage** button on the page, click the button. This will restage the application with DX APM for PCF enabled.  
+You can view application metrics after the application performs some tasks.
+
+1. If there is no **Restage** button, use the [cf-cli to push or restage the application.] (#cli3)
+
+###<a id='cli3'></a>Using the cf-cli
+1. Run the ``cf restage <application-name>`` command to restage the application with DX APM for PCF enabled.
+
+1. If you want to push the application again, navigate to the application directory and run the ``cf push`` command. 
+For additional options while pushing, see [this] (http://cli.cloudfoundry.org/en-US/cf/push.html).  
+You can view DX APM metrics after the application performs some tasks.
+
+
+##<a id='other'></a> Other Operations
+###<a id='updating'></a> Updating an Existing Service Instance
+You can update existing service instances with new configuration parameter values.    
+**Note**: You must restage or push the application for any changes to take effect.
+
+####<a id='apps4'></a>Using the Apps Manager
+1. Navigate to the service instance in Apps Manager.  
+Find the service instance either in the space in which it was created or under the application to which the service instance is bound. You can modify existing parameters and add new parameters to the service instance.
+
+1. Under the **Settings** tab, provide parameters and their associated values in the key value fields. Supported configuration parameters can be found [here] (#params).
+
+1. Click **Update Configuration Parameters** to update the service instance.
+
+1. [Restage] (#apps3) the application for changes to take effect. 
+
+
+####<a id='cli4'></a>Using the cf-cli
+1. Instructions to update service instances across platforms can be found [here] (http://cli.cloudfoundry.org/en-US/cf/update-service.html). Supported configuration parameters can be found [here] (#params).
+
+1. [Restage or push] (#cli3) the application for changes to take effect. 
+
+###<a id='updating'></a> Unbinding an Application from a Service Instance
+If you need to remove DX APM for PCF from an application, you must unbind the associated service instance from the application.    
+**Note**: You must restage or push the application for any changes to take effect.
+ 
+####<a id='apps5'></a>Using the Apps Manager
+1. Navigate to the application in Apps Manager.
+
+1. Under the **Service** tab, a listing shows the services that are bound to the application. 
+
+1. Access more options (3 vertical dots) on the appropriate service instance displayed and click **unbind**. This unbinds the service from that application.
+
+1. [Restage] (#apps3) the application for changes to take effect. 
+
+
+#####<a id='cli5'></a>Using the cf-cli
+1. Run the ``cf unbind-service <application-name> <service-instance-name>`` command to unbind the application.
+
+1. [Restage or push] (#cli3) the application for the changes to take effect. 
+
+
+##<a id='params'></a>DX APM for PCF Service Parameters
+1.  
+  
+	|  Parameter Key  |  Parameter Value/Description  |  
+	|  -----  |  -----  |  
+	|  ``agent_name``  |  (Optional) Name of the DX APM agent that monitors the application bound to the service instance.  |  
+	|  ``agent_default_process_name``  |  (Optional) Name of the process monitored by the agent. The application name is used by default.  |  
+	|  ``agent_manager_url``  |  (Required) The url of the DX APM Enterprise Manager server or DX APM SaaS tenant.  |  
+	|  ``agent_manager_credential ``  |  (May be required) The secret credential that authorizes an agent to access the DX APM Enterprise Manager or DX APM SaaS tenant.  |  

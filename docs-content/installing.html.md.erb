@@ -1,34 +1,35 @@
 ---
-title: Installing and Configuring YOUR-PRODUCT-NAME
-owner: Partners
+title: Installing and Configuring DX APM for PCF
 ---
 
-<strong><%= modified_date %></strong>
+##Before You Start
+1. Create a [Pivotal Network] (https://network.pivotal.io/) account if you do not have one.
 
-This topic describes how to install and configure YOUR-PRODUCT-NAME.
+1. [Redis for Pivotal Cloud Foundry (PCF)] (https://network.pivotal.io/products/p-redis) with Lua scripting enabled is a prerequisite for using DX APM for PCF. If you have it installed already, please check if Lua scripting is enabled. If not, please enable it in the Ops Manager and re-install the Redis tile. Lua scripting can be enabled in the **Shared-VM-Plan** and **On-Demand-Plans** configuration sections within the tile. You may install or re-install Redis alongside DX APM for PCF.
 
-##<a id='install'></a> Install and Configure YOUR-PRODUCT-NAME
 
-To install the YOUR-PRODUCT-NAME file on the Ops Manager Installation Dashboard, do the following:
+##Install the Tile
 
-1. Download the product file from Pivotal Network.
+1. If you have not already done so, download the **DX Application Performance Management for PCF** tile package from [Pivotal Network] (https://network.pivotal.io/).
 
-1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product** to upload the product file.
+1.  In Ops Manager, on the Installation Dashboard click **Import a Product** and upload the **DX Application Performance Management for PCF** tile package that you previously downloaded.  
+A new unused product entry for **DX Application Performance Management for PCF** displays.
 
-1. Under **Import a Product**, click **+** next to the version number of YOUR-PRODUCT-NAME.
-This adds the tile to your staging area.
+1. Click **+** next to **DX Application Performance Management for PCF** under the unused products section. 
 
-1. Click the newly added **YOUR-PRODUCT-NAME** tile.
+1. Click the newly added **DX Application Performance Management for PCF** tile.  
 
-1. **This portion of the procedure should tell the users how to configure the newly added tile by
-walking them through the sections. Which fields should they fill out? What are the different
-checkboxes? Include relevant screenshots here.**
+1. Assign the tile to the same network to which you have assigned other services.  
 
 1. Click **Save**.
 
-1. Return to the Ops Manager Installation Dashboard and click **Apply changes** to install YOUR-PRODUCT-NAME tile.
+1. Return to the Installation Dashboard.
 
-**If needed, include additional configuration information below. For example, maybe there are
-configuration options not required for installation but which could be useful for certain users. Typical topics include:**
-1. **Self-service**--Do you have recommendations on how to configure/design plans in the tile so that users can choose the best options for themselves?
-1. **High availability**--How do you configure/deploy X Service tile to be highly available?
+1. Click **Review Pending Changes** or **Install** depending on your PCF version.
+
+1. Click **Apply**. DX APM for PCF will now install (If you chose to install Redis for PCF alongside, it will install first).
+
+
+##Validate the Installation
+
+On successful installation, validate the install by running the ``cf marketplace -s introscope`` command. You should see a plan listing for **introscope**.
