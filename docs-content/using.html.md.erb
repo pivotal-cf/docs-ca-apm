@@ -1,9 +1,9 @@
 ---
-title: Using DX Application Performance Management for Pivotal Platform
+title: Using DX Application Performance Management for VMware Tanzu
 ---
 
 ##<a id='overview'></a> Overview
-Follow these high-level steps to use DX APM for Pivotal Platform:
+Follow these high-level steps to use DX APM for VMware Tanzu:
 
 1. [Create a service instance] (#creating).
 
@@ -30,18 +30,18 @@ These parameters are required: ``agent_manager_url``, the URL to an Enterprise M
 1. (Optional) You can [bind] (#apps2) this service instance to an application now or perform the bind later.
 
 1. Click **Create** to create the service instance.
-If the service instance creation fails, ensure that Lua scripting is enabled on your Redis for Pivotal Platform installation. It is required for DX APM for Pivotal Platform.
-Enable Lua scripting and reinstall Redis for Pivotal Platform in the Ops Manager. If Lua scripting is already enabled, contact [Broadcom Support] (https://www.broadcom.com/support/request-tech-support).
+If the service instance creation fails, ensure that Lua scripting is enabled on your Redis for VMware Tanzu installation. It is required for DX APM for VMware Tanzu.
+Enable Lua scripting and reinstall Redis for VMware Tanzu in the Ops Manager. If Lua scripting is already enabled, contact [Broadcom Support] (https://www.broadcom.com/support/request-tech-support).
 
 1. Proceed to [binding] (#apps2) this service instance to an application.
 
 ###<a id='cli1'></a>Using the cf-cli
 1. Run the ``cf target`` command to verify that your cf-cli is authenticated and pointing to the correct organization and space.
 
-1. Creating service instances across platforms are detailed on [Cloud Foundry] (https://cli.cloudfoundry.org/en-US/cf/create-service.html). When creating a service instance of DX APM for Pivotal Platform, configuration parameter ``agent_manager_url`` is required.
+1. Creating service instances across platforms are detailed on [Cloud Foundry] (https://cli.cloudfoundry.org/en-US/cf/create-service.html). When creating a service instance of DX APM for VMware Tanzu, configuration parameter ``agent_manager_url`` is required.
 For example, ``cf create-service introscope standard <your service instance name> -c '{"agent_manager_url" :"http://your.dx-apm.server.url"}'``
-Additional configuration parameters understood by DX APM for Pivotal Platform can be found [here] (#params).
-If the service instance creation fails, ensure that Lua scripting is enabled on your Redis for Pivotal Platform installation. It is required for DX APM for Pivotal Platform. Enable Lua scripting and reinstall Redis for Pivotal Platform in the Ops Manager. If Lua scripting is already enabled, contact [Broadcom Support] (https://www.broadcom.com/support/request-tech-support).
+Additional configuration parameters understood by DX APM for VMware Tanzu can be found [here] (#params).
+If the service instance creation fails, ensure that Lua scripting is enabled on your Redis for VMware Tanzu installation. It is required for DX APM for VMware Tanzu. Enable Lua scripting and reinstall Redis for VMware Tanzu in the Ops Manager. If Lua scripting is already enabled, contact [Broadcom Support] (https://www.broadcom.com/support/request-tech-support).
 
 1. Proceed to binding this service instance to an application by using either the [cf-cli] (#cli2) or the [application manifest] (#manifest).
 
@@ -89,13 +89,13 @@ If the service instance creation fails, ensure that Lua scripting is enabled on 
 ###<a id='apps3'></a>Using the Apps Manager
 1. Navigate to the application in Apps Manager.
 
-1. If **Restage** appears on the page, click to restage the application with DX APM for Pivotal Platform enabled.
+1. If **Restage** appears on the page, click to restage the application with DX APM for VMware Tanzu enabled.
 You can view application metrics after the application performs some tasks.
 
 1. If **Restage** does not appear, use the [cf-cli to push or restage the application.] (#cli3)
 
 ###<a id='cli3'></a>Using the cf-cli
-1. Run the ``cf restage <application-name>`` command to restage the application with DX APM for Pivotal Platform enabled.
+1. Run the ``cf restage <application-name>`` command to restage the application with DX APM for VMware Tanzu enabled.
 
 1. If you want to push the application again, navigate to the application directory and run the ``cf push`` command.
 For additional options while pushing, see [this] (http://cli.cloudfoundry.org/en-US/cf/push.html).
@@ -124,7 +124,7 @@ Find the service instance either in the space in which it was created or under t
 1. [Restage or push] (#cli3) the application for changes to take effect.
 
 ###<a id='updating'></a> Unbinding an Application from a Service Instance
-If you need to remove DX APM for Pivotal Platform from an application, you must unbind the associated service instance from the application.
+If you need to remove DX APM for VMware Tanzu from an application, you must unbind the associated service instance from the application.
 **Note**: You must restage or push the application for any changes to take effect.
 
 ####<a id='apps5'></a>Using the Apps Manager
@@ -143,7 +143,7 @@ If you need to remove DX APM for Pivotal Platform from an application, you must 
 1. [Restage or push] (#cli3) the application for the changes to take effect.
 
 
-##<a id='params'></a>DX APM for Pivotal Platform Service Parameters
+##<a id='params'></a>DX APM for VMware Tanzu Service Parameters
 1.
 
 	|  Parameter Key  |  Parameter Value/Description  |

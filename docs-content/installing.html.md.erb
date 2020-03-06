@@ -1,23 +1,23 @@
 ---
-title: Installing and Configuring DX APM for Pivotal Platform
+title: Installing and Configuring DX APM for VMware Tanzu
 ---
 
 ##Before You Start
 1. Create a [Pivotal Network] (https://network.pivotal.io/) account if you do not have one.
 
-1. [Redis for Pivotal Platform] (https://network.pivotal.io/products/p-redis) with Lua scripting enabled is a requirement for using DX APM for Pivotal Platform. If you have it installed already, check if Lua scripting is enabled. If not, enable it in the Ops Manager and re-install the Redis tile. Lua scripting can be enabled in the **Shared-VM-Plan** and **On-Demand-Plans** configuration sections within the tile. You can install or re-install Redis alongside DX APM for Pivotal Platform.
+1. [Redis for VMware Tanzu] (https://network.pivotal.io/products/p-redis) with Lua scripting enabled is a requirement for using DX APM for VMware Tanzu. If you have it installed already, check if Lua scripting is enabled. If not, enable it in the Ops Manager and re-install the Redis tile. Lua scripting can be enabled in the **Shared-VM-Plan** and **On-Demand-Plans** configuration sections within the tile. You can install or re-install Redis alongside DX APM for VMware Tanzu.
 
 
 ##Install the Tile
 
-1. If you have not already done so, download the **DX Application Performance Management for Pivotal Platform** tile package from [Pivotal Network] (https://network.pivotal.io/).
+1. If you have not already done so, download the **DX Application Performance Management for VMware Tanzu** tile package from [Pivotal Network] (https://network.pivotal.io/).
 
-1.  In Ops Manager, on the Installation Dashboard click **Import a Product** and upload the **DX Application Performance Management for Pivotal Platform** tile package that you previously downloaded.
-A new unused product entry for **DX Application Performance Management for Pivotal Platform** displays.
+1.  In Ops Manager, on the Installation Dashboard click **Import a Product** and upload the **DX Application Performance Management for VMware Tanzu** tile package that you previously downloaded.
+A new unused product entry for **DX Application Performance Management for VMware Tanzu** displays.
 
-1. Click **+** next to **DX Application Performance Management for Pivotal Platform** under the unused products section.
+1. Click **+** next to **DX Application Performance Management for VMware Tanzu** under the unused products section.
 
-1. Click the newly added **DX Application Performance Management for Pivotal Platform** tile.
+1. Click the newly added **DX Application Performance Management for VMware Tanzu** tile.
 
 1. Assign the tile to the same network to which you have assigned other services.
 
@@ -25,9 +25,9 @@ A new unused product entry for **DX Application Performance Management for Pivot
 
 1. Return to the Installation Dashboard.
 
-1. Click **Review Pending Changes** or **Install** depending on your Pivotal Platform version.
+1. Click **Review Pending Changes** or **Install** depending on your VMware Tanzu version.
 
-1. Click **Apply**. DX APM for Pivotal Platform will now install (If you chose to install Redis for Pivotal Platform alongside, it will install first).
+1. Click **Apply**. DX APM for VMware Tanzu will now install (If you chose to install Redis for VMware Tanzu alongside, it will install first).
 
 
 ##Validate the Installation
