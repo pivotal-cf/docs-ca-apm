@@ -16,8 +16,8 @@ public_host: hello
 sections:
   - repository:
       name: docs-content
-    directory: myservice
-    subnav_template: myservice_subnav.erb       
+    directory: dx-apm
+    subnav_template: dx-apm_subnav.erb       
 
 template_variables:                             # optional
 

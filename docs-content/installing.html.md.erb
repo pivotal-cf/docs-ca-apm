@@ -1,33 +1,33 @@
 ---
-title: Installing and Configuring DX APM for PCF
+title: Installing and Configuring DX APM for VMware Tanzu
 ---
 
 ##Before You Start
 1. Create a [Pivotal Network] (https://network.pivotal.io/) account if you do not have one.
 
-1. [Redis for Pivotal Cloud Foundry (PCF)] (https://network.pivotal.io/products/p-redis) with Lua scripting enabled is a prerequisite for using DX APM for PCF. If you have it installed already, please check if Lua scripting is enabled. If not, please enable it in the Ops Manager and re-install the Redis tile. Lua scripting can be enabled in the **Shared-VM-Plan** and **On-Demand-Plans** configuration sections within the tile. You may install or re-install Redis alongside DX APM for PCF.
+1. [Redis for VMware Tanzu] (https://network.pivotal.io/products/p-redis) with Lua scripting enabled is a requirement for using DX APM for VMware Tanzu. If you have it installed already, check if Lua scripting is enabled. If not, enable it in the Ops Manager and re-install the Redis tile. Lua scripting can be enabled in the **Shared-VM-Plan** and **On-Demand-Plans** configuration sections within the tile. You can install or re-install Redis alongside DX APM for VMware Tanzu.
 
 
 ##Install the Tile
 
-1. If you have not already done so, download the **DX Application Performance Management for PCF** tile package from [Pivotal Network] (https://network.pivotal.io/).
+1. If you have not already done so, download the **DX Application Performance Management for VMware Tanzu** tile package from [Pivotal Network] (https://network.pivotal.io/).
 
-1.  In Ops Manager, on the Installation Dashboard click **Import a Product** and upload the **DX Application Performance Management for PCF** tile package that you previously downloaded.  
-A new unused product entry for **DX Application Performance Management for PCF** displays.
+1.  In Ops Manager, on the Installation Dashboard click **Import a Product** and upload the **DX Application Performance Management for VMware Tanzu** tile package that you previously downloaded.
+A new unused product entry for **DX Application Performance Management for VMware Tanzu** displays.
 
-1. Click **+** next to **DX Application Performance Management for PCF** under the unused products section. 
+1. Click **+** next to **DX Application Performance Management for VMware Tanzu** under the unused products section.
 
-1. Click the newly added **DX Application Performance Management for PCF** tile.  
+1. Click the newly added **DX Application Performance Management for VMware Tanzu** tile.
 
-1. Assign the tile to the same network to which you have assigned other services.  
+1. Assign the tile to the same network to which you have assigned other services.
 
 1. Click **Save**.
 
 1. Return to the Installation Dashboard.
 
-1. Click **Review Pending Changes** or **Install** depending on your PCF version.
+1. Click **Review Pending Changes** or **Install** depending on your VMware Tanzu version.
 
-1. Click **Apply**. DX APM for PCF will now install (If you chose to install Redis for PCF alongside, it will install first).
+1. Click **Apply**. DX APM for VMware Tanzu will now install (If you chose to install Redis for VMware Tanzu alongside, it will install first).
 
 
 ##Validate the Installation
