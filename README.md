@@ -1,8 +1,6 @@
 ## Link to Published Content
 
-https://docs.pivotal.io/partners/PATH/ 
-
-_Add the link to the published doc when the product goes live._
+https://docs.pivotal.io/partners/dx-apm/index.html
 
 ## Pivotal Cloud Foundry Partners Template
 
